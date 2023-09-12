@@ -1,3 +1,4 @@
+#pragma once
 /*
 MultiDelegate.h - A queue or event multiplexer based on the efficient Delegate
 class
@@ -25,7 +26,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #if defined(ESP8266) || defined(ESP32) || !defined(ARDUINO)
 #include <atomic>
 #else
-#include "circular_queue/ghostl.h"
+#include "ghostl.h"
 #endif
 
 #if defined(ESP8266)
@@ -199,7 +200,7 @@ namespace delegate
                 // if no unused items, and count not too high, allocate a new one
                 else if (nodeCount < QUEUE_CAPACITY)
                 {
-#if defined(ESP8266) || defined(ESP32)            	
+#if defined(ESP8266) || defined(ESP32)
                     result = new (std::nothrow) Node_t;
 #else
                     result = new Node_t;
@@ -298,7 +299,7 @@ namespace delegate
 #endif
 
                 Node_t* item = ISQUEUE ? get_node_unsafe() :
-#if defined(ESP8266) || defined(ESP32)            	
+#if defined(ESP8266) || defined(ESP32)
                     new (std::nothrow) Node_t;
 #else
                     new Node_t;
